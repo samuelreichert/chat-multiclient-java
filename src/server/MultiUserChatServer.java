@@ -2,6 +2,8 @@ package server;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by samuel on 24/09/15.
@@ -9,6 +11,7 @@ import java.net.Socket;
 public class MultiUserChatServer {
     ServerSocket serverSocket;
     Socket socketNewClient;
+    static List<ConnectedClient> clients = new ArrayList<>();
 
     public void configServer() {
         try{
@@ -23,6 +26,7 @@ public class MultiUserChatServer {
             while(true) {
                 socketNewClient = serverSocket.accept();
                 ConnectedClient newClient = new ConnectedClient(socketNewClient);
+                clients.add(newClient);
             }
         }catch (Exception e) {
             e.printStackTrace();

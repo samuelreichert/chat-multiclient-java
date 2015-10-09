@@ -36,6 +36,10 @@ public class ConnectedClient implements Runnable{
             String message;
             while ((message = in.readLine()) != null) {
                 System.out.println(message);
+
+                for (ConnectedClient client : MultiUserChatServer.clients) {
+                    client.sendMessage(message);
+                }
             }
         }catch (Exception e) {
             e.printStackTrace();
