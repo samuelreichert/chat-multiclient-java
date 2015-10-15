@@ -43,10 +43,10 @@ public class ChatClienteGUI extends javax.swing.JFrame {
         tfHost = new javax.swing.JTextField();
         tfPorta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        tfNickName = new javax.swing.JTextField();
+        tfUsername = new javax.swing.JTextField();
         btConectar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        lbNickName = new javax.swing.JLabel();
+        labelUsername = new javax.swing.JLabel();
         btDesconectar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -79,7 +79,7 @@ public class ChatClienteGUI extends javax.swing.JFrame {
 
         jLabel4.setText("Porta:");
 
-        jLabel5.setText("Nick Name:");
+        jLabel5.setText("Username:");
 
         btConectar.setText("Conectar");
         btConectar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,10 +92,10 @@ public class ChatClienteGUI extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Você está conectado como");
 
-        lbNickName.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        lbNickName.setForeground(new java.awt.Color(51, 51, 255));
-        lbNickName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbNickName.setText("Nick Name");
+        labelUsername.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        labelUsername.setForeground(new java.awt.Color(51, 51, 255));
+        labelUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelUsername.setText("Username");
 
         btDesconectar.setText("Desconectar");
 
@@ -121,7 +121,7 @@ public class ChatClienteGUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfNickName))
+                                .addComponent(tfUsername))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(8, 8, 8)
@@ -137,7 +137,7 @@ public class ChatClienteGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(lbNickName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(labelUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tfMensagemEnviar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -160,7 +160,7 @@ public class ChatClienteGUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5)
-                                    .addComponent(tfNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addComponent(btDesconectar))
@@ -172,7 +172,7 @@ public class ChatClienteGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNickName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(labelUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
@@ -192,31 +192,31 @@ public class ChatClienteGUI extends javax.swing.JFrame {
         
         int port = Integer.parseInt(tfPorta.getText());
         String host = tfHost.getText();
-        String nickName = tfNickName.getText();
+        String username = tfUsername.getText();
         client = new ChatClient();
         client.setHost(host);
         client.setPorta(port);
-        client.setNickName(nickName);
+        client.setUsername(username);
         client.setTxtOut(taMensagensGerais);
         client.setTxtOutClients(taUsuariosAtivos);        
         client.startThreadClient();
         
-        lbNickName.setText(tfNickName.getText());
-        taUsuariosAtivos.append(tfNickName.getText());
+        labelUsername.setText(tfUsername.getText());
+        taUsuariosAtivos.append(tfUsername.getText());
         
         btEnviar.setEnabled(true);
         btConectar.setEnabled(false);
         tfHost.setEditable(false);
         tfHost.setEnabled(false);
-        tfNickName.setEditable(false);
-        tfNickName.setEnabled(false);
+        tfUsername.setEditable(false);
+        tfUsername.setEnabled(false);
         tfPorta.setEditable(false);
         tfPorta.setEnabled(false);
     }//GEN-LAST:event_btConectarActionPerformed
 
     private void btEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarActionPerformed
-        client.sendMessage(tfNickName.getText() + 
-                ": " + tfMensagemEnviar.getText());
+        client.sendMessage(tfUsername.getText() +
+                "disse: " + tfMensagemEnviar.getText());
         tfMensagemEnviar.setText("");
     }//GEN-LAST:event_btEnviarActionPerformed
 
@@ -267,12 +267,12 @@ public class ChatClienteGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lbNickName;
+    private javax.swing.JLabel labelUsername;
     private javax.swing.JTextArea taMensagensGerais;
     private javax.swing.JTextArea taUsuariosAtivos;
     private javax.swing.JTextField tfHost;
     private javax.swing.JTextField tfMensagemEnviar;
-    private javax.swing.JTextField tfNickName;
+    private javax.swing.JTextField tfUsername;
     private javax.swing.JTextField tfPorta;
     // End of variables declaration//GEN-END:variables
 }

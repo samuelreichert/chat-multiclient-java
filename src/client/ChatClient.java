@@ -20,7 +20,7 @@ public class ChatClient implements Runnable{
 
     int port;
     String host;
-    String nickName;
+    String username;
     Thread thClient;
     Socket socket;
     BufferedReader in;
@@ -45,12 +45,12 @@ public class ChatClient implements Runnable{
         return host;
     } 
     
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getUsername() {
+        return username;
     }
     
     public void setTxtOut(JTextArea txtOut) {
@@ -77,7 +77,7 @@ public class ChatClient implements Runnable{
         thClient.start();
     }
     
-    public void receiveMessages(){
+    public void getMessages(){
         try {
             String msg;
             while((msg = in.readLine()) != null){
@@ -98,8 +98,6 @@ public class ChatClient implements Runnable{
     //método que executa, conforme implementação de Runnable
     public void run() {
         configClient();
-        receiveMessages();
+        getMessages();
     }
-
-    
 }
