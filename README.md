@@ -10,3 +10,5 @@
 
 #### Ideia
 Na lista de usuários online poderia haver um 'geral', que serviria para enviar mensagens públicas, acredito que facilitaria na troca entre uma tela e outra.
+
+testestestes
