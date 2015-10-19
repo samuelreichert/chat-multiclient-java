@@ -67,8 +67,10 @@ public class ChatClienteGUI extends javax.swing.JFrame {
 
         tfMensagemEnviar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tfMensagemEnviar.setToolTipText("");
+        tfMensagemEnviar.setEnabled(false);
 
         btEnviar.setText("Enviar");
+        btEnviar.setEnabled(false);
         btEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btEnviarActionPerformed(evt);
@@ -98,6 +100,12 @@ public class ChatClienteGUI extends javax.swing.JFrame {
         labelUsername.setText("Username");
 
         btDesconectar.setText("Desconectar");
+        btDesconectar.setEnabled(false);
+        btDesconectar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDesconectarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -200,26 +208,45 @@ public class ChatClienteGUI extends javax.swing.JFrame {
         client.setTxtOut(taMensagensGerais);
         client.setTxtOutClients(taUsuariosAtivos);        
         client.startThreadClient();
-        
+
         labelUsername.setText(tfUsername.getText());
-        taUsuariosAtivos.append(tfUsername.getText());
-        
-        btEnviar.setEnabled(true);
-        btConectar.setEnabled(false);
-        tfHost.setEditable(false);
-        tfHost.setEnabled(false);
-        tfUsername.setEditable(false);
-        tfUsername.setEnabled(false);
-        tfPorta.setEditable(false);
-        tfPorta.setEnabled(false);
+
+        enableConnected();
     }//GEN-LAST:event_btConectarActionPerformed
 
     private void btEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarActionPerformed
-        client.sendMessage(tfUsername.getText() +
-                "disse: " + tfMensagemEnviar.getText());
+        client.sendMessage(tfUsername.getText() + " disse: " + tfMensagemEnviar.getText());
         tfMensagemEnviar.setText("");
     }//GEN-LAST:event_btEnviarActionPerformed
 
+    private void btDesconectarActionPerformed(java.awt.event.ActionEvent evt) {
+        enableDisconnected();
+    }
+    public void enableConnected() {
+        tfHost.setEditable(false);
+        tfHost.setEnabled(false);
+        tfPorta.setEditable(false);
+        tfPorta.setEnabled(false);
+        tfUsername.setEditable(false);
+        tfUsername.setEnabled(false);
+        tfMensagemEnviar.setEnabled(true);
+        btEnviar.setEnabled(true);
+        btConectar.setEnabled(false);
+        btDesconectar.setEnabled(true);
+    }
+
+    public void enableDisconnected() {
+        tfHost.setEditable(true);
+        tfHost.setEnabled(true);
+        tfPorta.setEditable(true);
+        tfPorta.setEnabled(true);
+        tfUsername.setEditable(true);
+        tfUsername.setEnabled(true);
+        tfMensagemEnviar.setEnabled(false);
+        btEnviar.setEnabled(false);
+        btConectar.setEnabled(true);
+        btDesconectar.setEnabled(false);
+    }
     /**
      * @param args the command line arguments
      */

@@ -66,6 +66,8 @@ public class ChatClient implements Runnable{
             socket = new Socket(host, port);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream());
+
+            waitAcceptance();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,9 +97,27 @@ public class ChatClient implements Runnable{
         System.out.println(msg);
     }
 
+    public void waitAcceptance() {
+        try {
+            out.println(username);
+            out.flush();
+
+            String message = in.readLine();
+
+            if(message.equals("Conectado")) {
+                getMessages();
+            } else {
+                txtOut.append(message);
+                txtOut.append("\n");
+                socket.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     //método que executa, conforme implementação de Runnable
     public void run() {
         configClient();
-        getMessages();
     }
 }
