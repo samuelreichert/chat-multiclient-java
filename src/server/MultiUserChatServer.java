@@ -54,7 +54,7 @@ public class MultiUserChatServer {
                 addClient(socketNewClient, username);
                 out.println("Conectado");
             } else {
-                out.println("Não conectado. Username já está em uso.");
+                out.println("Não conectado. Username '" + username + "' já está em uso.");
             }
             out.flush();
         } catch (Exception e) {
