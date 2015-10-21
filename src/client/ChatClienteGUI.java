@@ -6,12 +6,13 @@
 
 package client;
 
+import java.io.IOException;
+
 /**
  *
  * @author gugel
  */
 public class ChatClienteGUI extends javax.swing.JFrame {
-
     ChatClient client;
     
     /**
@@ -202,6 +203,7 @@ public class ChatClienteGUI extends javax.swing.JFrame {
         String host = tfHost.getText();
         String username = tfUsername.getText();
         client = new ChatClient();
+        client.setChatClientGui(this);
         client.setHost(host);
         client.setPorta(port);
         client.setUsername(username);
@@ -220,7 +222,13 @@ public class ChatClienteGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btEnviarActionPerformed
 
     private void btDesconectarActionPerformed(java.awt.event.ActionEvent evt) {
-        enableDisconnected();
+        try {
+            client.socket.close();
+            enableDisconnected();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
     public void enableConnected() {
         tfHost.setEditable(false);

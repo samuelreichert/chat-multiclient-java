@@ -25,6 +25,7 @@ public class ChatClient implements Runnable{
     Socket socket;
     BufferedReader in;
     PrintWriter out;
+    ChatClienteGUI chatClientGui;
     
     JTextArea txtOut;
     JTextArea txtOutClients;
@@ -59,6 +60,10 @@ public class ChatClient implements Runnable{
     
     public void setTxtOutClients(JTextArea txtOutClients) {
         this.txtOutClients = txtOutClients;
+    }
+
+    public void setChatClientGui(ChatClienteGUI chatClientGui) {
+        this.chatClientGui = chatClientGui;
     }
         
     public void configClient(){
@@ -110,6 +115,7 @@ public class ChatClient implements Runnable{
                 txtOut.append(message);
                 txtOut.append("\n");
                 socket.close();
+                chatClientGui.enableDisconnected();
             }
         } catch (Exception e) {
             e.printStackTrace();
