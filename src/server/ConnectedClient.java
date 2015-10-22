@@ -13,9 +13,11 @@ public class ConnectedClient implements Runnable{
     Thread threadGetMessage;
     BufferedReader in;
     PrintWriter out;
+    String username;
 
-    public ConnectedClient(Socket socket) {
+    public ConnectedClient(Socket socket, String username) {
         configClient(socket);
+        this.username = username;
     }
 
     public void configClient(Socket socket) {
@@ -45,13 +47,6 @@ public class ConnectedClient implements Runnable{
             e.printStackTrace();
         }
     }
-    
-    /*public void refreshConnectedClients(){
-        for (ConnectedClient client : MultiUserChatServer.clients) {
-            out.println();
-            out.flush();
-        }
-    }*/
 
     public void sendMessage(String message) {
         out.println(message);
@@ -61,6 +56,5 @@ public class ConnectedClient implements Runnable{
     @Override
     public void run() {
         getMessages();
-        //refreshConnectedClients();
     }
 }

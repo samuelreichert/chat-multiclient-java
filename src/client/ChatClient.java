@@ -7,10 +7,14 @@
 package client;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.net.Socket;
-import javax.swing.JTextArea;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.*;
 
 /**
  *
@@ -26,9 +30,11 @@ public class ChatClient implements Runnable{
     BufferedReader in;
     PrintWriter out;
     ChatClienteGUI chatClientGui;
+    List<String> listaUsers = new ArrayList();
     
     JTextArea txtOut;
-    JTextArea txtOutClients;
+    JList txtOutClients;
+    int contador = 0;
     
     public void setPorta(int porta) {
         this.port = porta;
@@ -58,7 +64,7 @@ public class ChatClient implements Runnable{
         this.txtOut = txtOut;
     }
     
-    public void setTxtOutClients(JTextArea txtOutClients) {
+    public void setTxtOutClients(JList txtOutClients) {
         this.txtOutClients = txtOutClients;
     }
 
@@ -71,7 +77,7 @@ public class ChatClient implements Runnable{
             socket = new Socket(host, port);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream());
-
+            
             waitAcceptance();
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,17 +89,51 @@ public class ChatClient implements Runnable{
         thClient = new Thread(this);
         thClient.start();
     }
-    
+
     public void getMessages(){
         try {
             String msg;
             while((msg = in.readLine()) != null){
-                txtOut.append(msg);
-                txtOut.append("\n");
+                if (msg.substring(0, 1).equals("+")) {
+                    updateUsersList(msg);
+                } else {
+                    txtOut.append(msg);
+                    txtOut.append("\n");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateUsersList(String message) {
+        int inicio = message.indexOf("+");
+        int fim = message.lastIndexOf("+");
+        int length = Integer.parseInt(message.substring((inicio + 1), fim));
+        String username = message.substring((fim + 1), message.length());
+
+        System.out.println(length);
+
+        listaUsers.add(username);
+
+        if (listaUsers.size() == length) {
+            DefaultListModel model = new DefaultListModel();
+            txtOutClients.setModel(model);
+
+            for (String user : listaUsers) {
+                model.addElement(user);
+            }
+            listaUsers.clear();
+        }
+    }
+
+    public void getMessagesConnected(Boolean b, String text) throws IOException{
+        
+        if (!b) {
+            JOptionPane.showMessageDialog(null, text);
+            socket.close();
+            chatClientGui.enableDisconnected();
+        }           
     }
     
     public void sendMessage(String msg){
@@ -109,9 +149,7 @@ public class ChatClient implements Runnable{
 
             String message = in.readLine();
 
-            if(message.equals("Conectado")) {
-                getMessages();
-            } else {
+            if(!message.equals("Conectado")) {
                 txtOut.append(message);
                 txtOut.append("\n");
                 socket.close();
@@ -125,5 +163,6 @@ public class ChatClient implements Runnable{
     //método que executa, conforme implementação de Runnable
     public void run() {
         configClient();
+        getMessages();
     }
 }

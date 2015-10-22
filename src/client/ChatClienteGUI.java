@@ -7,6 +7,7 @@
 package client;
 
 import java.io.IOException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,8 +32,6 @@ public class ChatClienteGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        taUsuariosAtivos = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         taMensagensGerais = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
@@ -44,18 +43,15 @@ public class ChatClienteGUI extends javax.swing.JFrame {
         tfHost = new javax.swing.JTextField();
         tfPorta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        tfUsername = new javax.swing.JTextField();
+        tfNickName = new javax.swing.JTextField();
         btConectar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        labelUsername = new javax.swing.JLabel();
+        lbNickName = new javax.swing.JLabel();
         btDesconectar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listUsers = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        taUsuariosAtivos.setEditable(false);
-        taUsuariosAtivos.setColumns(20);
-        taUsuariosAtivos.setRows(5);
-        jScrollPane2.setViewportView(taUsuariosAtivos);
 
         taMensagensGerais.setEditable(false);
         taMensagensGerais.setColumns(20);
@@ -68,10 +64,8 @@ public class ChatClienteGUI extends javax.swing.JFrame {
 
         tfMensagemEnviar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tfMensagemEnviar.setToolTipText("");
-        tfMensagemEnviar.setEnabled(false);
 
         btEnviar.setText("Enviar");
-        btEnviar.setEnabled(false);
         btEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btEnviarActionPerformed(evt);
@@ -82,7 +76,7 @@ public class ChatClienteGUI extends javax.swing.JFrame {
 
         jLabel4.setText("Porta:");
 
-        jLabel5.setText("Username:");
+        jLabel5.setText("Nick Name:");
 
         btConectar.setText("Conectar");
         btConectar.addActionListener(new java.awt.event.ActionListener() {
@@ -93,12 +87,13 @@ public class ChatClienteGUI extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Você está conectado como");
+        jLabel6.setText("Seja bem-vindo e divirta-se");
 
-        labelUsername.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        labelUsername.setForeground(new java.awt.Color(51, 51, 255));
-        labelUsername.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelUsername.setText("Username");
+        lbNickName.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        lbNickName.setForeground(new java.awt.Color(51, 51, 255));
+        lbNickName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbNickName.setText("Use concientemente");
+        lbNickName.setName("tfUsername"); // NOI18N
 
         btDesconectar.setText("Desconectar");
         btDesconectar.setEnabled(false);
@@ -108,6 +103,9 @@ public class ChatClienteGUI extends javax.swing.JFrame {
             }
         });
 
+        listUsers.setName("listUsers"); // NOI18N
+        jScrollPane1.setViewportView(listUsers);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,9 +114,9 @@ public class ChatClienteGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2))
+                            .addComponent(jScrollPane1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -130,7 +128,7 @@ public class ChatClienteGUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfUsername))
+                                .addComponent(tfNickName))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(8, 8, 8)
@@ -146,7 +144,7 @@ public class ChatClienteGUI extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(labelUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lbNickName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tfMensagemEnviar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -169,7 +167,7 @@ public class ChatClienteGUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5)
-                                    .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(tfNickName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addComponent(btDesconectar))
@@ -181,11 +179,11 @@ public class ChatClienteGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbNickName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
@@ -199,61 +197,75 @@ public class ChatClienteGUI extends javax.swing.JFrame {
     private void btConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConectarActionPerformed
         // TODO add your handling code here:
         
-        int port = Integer.parseInt(tfPorta.getText());
-        String host = tfHost.getText();
-        String username = tfUsername.getText();
-        client = new ChatClient();
-        client.setChatClientGui(this);
-        client.setHost(host);
-        client.setPorta(port);
-        client.setUsername(username);
-        client.setTxtOut(taMensagensGerais);
-        client.setTxtOutClients(taUsuariosAtivos);        
-        client.startThreadClient();
+        if (FieldsValidate()) {
+            int port = Integer.parseInt(tfPorta.getText());
+            String host = tfHost.getText();
+            String username = tfNickName.getText();
+            client = new ChatClient();
+            client.setChatClientGui(this);
+            client.setHost(host);
+            client.setPorta(port);
+            client.setUsername(username);
+            client.setTxtOut(taMensagensGerais);
+            client.setTxtOutClients(listUsers);        
+            client.startThreadClient();
 
-        labelUsername.setText(tfUsername.getText());
-
-        enableConnected();
+            enableConnected();
+        }
     }//GEN-LAST:event_btConectarActionPerformed
 
     private void btEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarActionPerformed
-        client.sendMessage(tfUsername.getText() + " disse: " + tfMensagemEnviar.getText());
+        client.sendMessage(tfNickName.getText() + " disse: " + tfMensagemEnviar.getText());
         tfMensagemEnviar.setText("");
     }//GEN-LAST:event_btEnviarActionPerformed
 
-    private void btDesconectarActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btDesconectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDesconectarActionPerformed
         try {
+
             client.socket.close();
             enableDisconnected();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
+    }//GEN-LAST:event_btDesconectarActionPerformed
+    
     public void enableConnected() {
         tfHost.setEditable(false);
         tfHost.setEnabled(false);
         tfPorta.setEditable(false);
         tfPorta.setEnabled(false);
-        tfUsername.setEditable(false);
-        tfUsername.setEnabled(false);
+        tfNickName.setEditable(false);
+        tfNickName.setEnabled(false);
         tfMensagemEnviar.setEnabled(true);
         btEnviar.setEnabled(true);
         btConectar.setEnabled(false);
         btDesconectar.setEnabled(true);
+         
     }
 
     public void enableDisconnected() {
+        tfHost.setText(null);
         tfHost.setEditable(true);
         tfHost.setEnabled(true);
+        tfPorta.setText(null);
         tfPorta.setEditable(true);
         tfPorta.setEnabled(true);
-        tfUsername.setEditable(true);
-        tfUsername.setEnabled(true);
+        tfNickName.setText(null);
+        tfNickName.setEditable(true);
+        tfNickName.setEnabled(true);
         tfMensagemEnviar.setEnabled(false);
         btEnviar.setEnabled(false);
         btConectar.setEnabled(true);
         btDesconectar.setEnabled(false);
+    }
+    
+    public boolean FieldsValidate() {
+        if (tfHost.getText().isEmpty() || tfPorta.getText().isEmpty() || tfNickName.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, informe todos os campos para se conectar.");
+            return false;
+        }
+        else
+            return true;
     }
     /**
      * @param args the command line arguments
@@ -300,14 +312,14 @@ public class ChatClienteGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel labelUsername;
+    private javax.swing.JLabel lbNickName;
+    private javax.swing.JList listUsers;
     private javax.swing.JTextArea taMensagensGerais;
-    private javax.swing.JTextArea taUsuariosAtivos;
     private javax.swing.JTextField tfHost;
     private javax.swing.JTextField tfMensagemEnviar;
-    private javax.swing.JTextField tfUsername;
+    private javax.swing.JTextField tfNickName;
     private javax.swing.JTextField tfPorta;
     // End of variables declaration//GEN-END:variables
 }

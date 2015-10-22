@@ -1,13 +1,18 @@
 package server;
 
+import client.ChatClient;
+import client.ChatClienteGUI;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  * Created by samuel on 24/09/15.
@@ -15,6 +20,7 @@ import java.util.Scanner;
 public class MultiUserChatServer {
     ServerSocket serverSocket;
     Socket socketNewClient;
+    static Map<String, Socket> MAP_CLIENTES;
     static List<ConnectedClient> clients = new ArrayList<>();
     static List<String> usernameClients = new ArrayList<>();
     Scanner keyboardIn = new Scanner(System.in);
@@ -26,6 +32,7 @@ public class MultiUserChatServer {
             porta = keyboardIn.nextInt();
 
             serverSocket = new ServerSocket(porta);
+            MAP_CLIENTES = new HashMap<String, Socket>();
 
             System.out.println("Servidor pronto para receber conexões!");
         }catch (Exception e){
@@ -51,20 +58,28 @@ public class MultiUserChatServer {
             String username = in.readLine();
 
             if (!usernameClients.contains(username)) {
-                addClient(socketNewClient, username);
+                ConnectedClient newClient = new ConnectedClient(socketNewClient, username);
+                clients.add(newClient);
+                int length = clients.size();
                 out.println("Conectado");
+                out.flush();
+
+                for (ConnectedClient client : clients) {
+                    for (ConnectedClient cc : clients) {
+                        client.sendMessage("+" + length + "+" + cc.username);
+                    }
+                }
             } else {
                 out.println("Não conectado. Username '" + username + "' já está em uso.");
-            }
-            out.flush();
+                out.flush();
+            }  
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    public void addClient(Socket socketNewClient, String username) {
-        ConnectedClient newClient = new ConnectedClient(socketNewClient);
-        usernameClients.add(username);
-        clients.add(newClient);
+    
+    public void refreshConnectedClients(){
+        
     }
 }
