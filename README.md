@@ -9,12 +9,5 @@
 * [ ] - Alerta de entrada/saída de usuário no log de mensagens
 * [x] - Lista de usuários sempre atualizada (Apenas os usuários que estão online)
 
-#####Tarefas que precisam ser feitas / em andamento
-* [ ] - Quando clicar em desconectar tem que enviar para o server o aviso
-* [ ] - Quando o usuário se desconectar o servidor tem que remove-lo da lista de usuários e avisar todos
+#####Tarefas que precisam ser feitas
 * [x] - Pensar numa forma de armazenar o socket do usuário e o username no mesmo local (array?), quando usuário for desconectar vai facilitar remover o socket e o username.
-
-#### Ideia
-Na lista de usuários online poderia haver um 'geral', que serviria para enviar mensagens públicas, acredito que facilitaria na troca entre uma tela e outra.
-
-testestestes
