@@ -10,10 +10,10 @@ import java.net.Socket;
  */
 public class ConnectedClient implements Runnable{
     Socket socket;
+    String username;
     Thread threadGetMessage;
     BufferedReader in;
     PrintWriter out;
-    String username;
 
     public ConnectedClient(Socket socket, String username) {
         configClient(socket);
@@ -22,6 +22,7 @@ public class ConnectedClient implements Runnable{
 
     public void configClient(Socket socket) {
         this.socket = socket;
+
         try{
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream());

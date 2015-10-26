@@ -20,7 +20,6 @@ import javax.swing.JOptionPane;
 public class MultiUserChatServer {
     ServerSocket serverSocket;
     Socket socketNewClient;
-    static Map<String, Socket> MAP_CLIENTES;
     static List<ConnectedClient> clients = new ArrayList<>();
     static List<String> usernameClients = new ArrayList<>();
     Scanner keyboardIn = new Scanner(System.in);
@@ -32,7 +31,6 @@ public class MultiUserChatServer {
             porta = keyboardIn.nextInt();
 
             serverSocket = new ServerSocket(porta);
-            MAP_CLIENTES = new HashMap<String, Socket>();
 
             System.out.println("Servidor pronto para receber conexões!");
         }catch (Exception e){
@@ -56,30 +54,29 @@ public class MultiUserChatServer {
             BufferedReader in = new BufferedReader(new InputStreamReader(socketNewClient.getInputStream()));
             PrintWriter out = new PrintWriter(socketNewClient.getOutputStream());
             String username = in.readLine();
+            username = username.toLowerCase();
 
             if (!usernameClients.contains(username)) {
                 ConnectedClient newClient = new ConnectedClient(socketNewClient, username);
                 clients.add(newClient);
+                usernameClients.add(username);
                 int length = clients.size();
-                out.println("Conectado");
-                out.flush();
 
+                out.println("true");
+                out.flush();
                 for (ConnectedClient client : clients) {
+                    client.sendMessage("Usuário '" + username + "' entrou neste chat.");
+
                     for (ConnectedClient cc : clients) {
                         client.sendMessage("+" + length + "+" + cc.username);
                     }
                 }
             } else {
-                out.println("Não conectado. Username '" + username + "' já está em uso.");
+                out.println("Não foi possível se conectar. Usuário '" + username + "' já está em uso.");
                 out.flush();
-            }  
-
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-    
-    public void refreshConnectedClients(){
-        
     }
 }

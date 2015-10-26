@@ -149,7 +149,7 @@ public class ChatClient implements Runnable{
 
             String message = in.readLine();
 
-            if(!message.equals("Conectado")) {
+            if(!message.equals("true")) {
                 txtOut.append(message);
                 txtOut.append("\n");
                 socket.close();
