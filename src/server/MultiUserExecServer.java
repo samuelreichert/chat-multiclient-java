@@ -5,8 +5,8 @@ package server;
  */
 public class MultiUserExecServer {
     public static void main(String[] args) {
-        MultiUserChatServer mucs = new MultiUserChatServer();
-        mucs.configServer();
-        mucs.waitClients();
+        MultiUserChatServer multiUserChatServer = new MultiUserChatServer();
+        multiUserChatServer.configServer();
+        multiUserChatServer.waitClients();
     }
 }

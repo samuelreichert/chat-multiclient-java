@@ -72,11 +72,11 @@ public class ChatClienteGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Host:");
+        jLabel3.setText("Servidor:");
 
         jLabel4.setText("Porta:");
 
-        jLabel5.setText("Nick Name:");
+        jLabel5.setText("Usuário:");
 
         btConectar.setText("Conectar");
         btConectar.addActionListener(new java.awt.event.ActionListener() {
@@ -215,13 +215,16 @@ public class ChatClienteGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btConectarActionPerformed
 
     private void btEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnviarActionPerformed
+        if(tfMensagemEnviar.getText().equals("")) {
+            return;
+        }
+
         client.sendMessage(tfNickName.getText() + " disse: " + tfMensagemEnviar.getText());
         tfMensagemEnviar.setText("");
     }//GEN-LAST:event_btEnviarActionPerformed
 
     private void btDesconectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDesconectarActionPerformed
         try {
-
             client.socket.close();
             enableDisconnected();
         } catch (IOException e) {
@@ -240,7 +243,6 @@ public class ChatClienteGUI extends javax.swing.JFrame {
         btEnviar.setEnabled(true);
         btConectar.setEnabled(false);
         btDesconectar.setEnabled(true);
-         
     }
 
     public void enableDisconnected() {
@@ -263,9 +265,9 @@ public class ChatClienteGUI extends javax.swing.JFrame {
         if (tfHost.getText().isEmpty() || tfPorta.getText().isEmpty() || tfNickName.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor, informe todos os campos para se conectar.");
             return false;
-        }
-        else
+        } else {
             return true;
+        }
     }
     /**
      * @param args the command line arguments
