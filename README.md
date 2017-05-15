@@ -1,7 +1,8 @@
 # Chat Multi Client feito em Java
 
-###Features necessárias a serem implementadas
-#####As tarefas prontas já estão marcadas
+### Features necessárias a serem implementadas
+
+##### As tarefas prontas já estão marcadas
 * [x] - (Client Side) Conexão com servidor, definindo host e porta
 * [x] - Usuário é identificado por username, então o username tem que ser único
 * [x] - Envio de mensagens públicas (Todos usuários recebem)
