@@ -10,6 +10,6 @@
 * [ ] - Alerta de entrada/saída de usuário no log de mensagens
 * [x] - Lista de usuários sempre atualizada (Apenas os usuários que estão online)
 
-#####Tarefas que precisam ser feitas
+##### Tarefas que precisam ser feitas
 * [x] - Pensar numa forma de armazenar o socket do usuário e o username no mesmo local (array?), quando usuário for desconectar vai facilitar remover o socket e o username.
 * [ ] - Falta ainda atualizar a lista de usuários quando alguém sair
